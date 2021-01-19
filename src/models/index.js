@@ -1,3 +1,11 @@
-import * as usuario from './usuario'
-import cancion from './cancion'
-import listaReproduccion from './listaReproduccion'
+import * as users from './users';
+import canciones from './canciones'
+import listaReproducciones from './listaReproducciones'
+
+
+export default {
+    users,
+    canciones,
+    listaReproducciones
+    
+}
