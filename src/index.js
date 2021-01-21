@@ -5,13 +5,14 @@ import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import morganBody from "morgan-body";
+import mongoose from "mongoose";
 
 // Imports de componentes del API
 import models from './models';
 import routes from './routes';
 
-// Imports de otros middlewares y servicios;
-import passport from './services/passport';
+// Imports de otros middlewares;
+
 
 
 // Instanciación de la aplicación de Express
@@ -30,9 +31,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'))
 morganBody(app);
 
-// Inicialización de passport
-app.use(passport.initialize());
-
 
 /*
   Este middleware nos permite añadir alguna información al contexto de cada petición,
@@ -42,7 +40,11 @@ app.use(passport.initialize());
 app.use((req, res, next) => {
   // Para cualquier petición, añadimos en su contexto
   req.context = {
-    models
+    // Todos los modelos
+    models,
+    // El "usuario actual". Ahora mismo simula que hayamos hecho un login
+    // Más adelante, lo podremos conseguir de otra forma.
+    // me: models.users.userRepository.findById(1)
   };
   next();
 });
@@ -50,15 +52,22 @@ app.use((req, res, next) => {
 
 // Configuración de las rutas.
 app.use('/users', routes.user);
-//app.use('/post', routes.post);
-app.use('/auth', routes.auth)
 
 
 
+// Inicialización del servidor y conexión a base de datos
 
-// Inicialización del servidor
-app.listen(process.env.PORT, () =>
-  console.log(
-    `¡Aplicación de ejemplo escuchando en el puerto ${process.env.PORT}!`
-  )
-);
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+  
+  if (err) {
+    console.log(`Error de conexión a la base de datos: ${JSON.stringify(err)}`);
+  } else {
+    console.log(`Conexión correcta a la base de datos en la URI ${process.env.DB_URI}`);
+    app.listen(process.env.PORT, () =>
+      console.log(
+        `¡Aplicación de ejemplo escuchando en el puerto ${process.env.PORT}!`
+      )
+    );
+  }
+
+});
