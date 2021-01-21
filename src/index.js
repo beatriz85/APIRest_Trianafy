@@ -10,6 +10,10 @@ import morganBody from "morgan-body";
 import models from './models';
 import routes from './routes';
 
+// Imports de otros middlewares y servicios;
+import passport from './services/passport';
+
+
 // Instanciación de la aplicación de Express
 const app = express();
 
@@ -26,6 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'))
 morganBody(app);
 
+// Inicialización de passport
+app.use(passport.initialize());
+
 
 /*
   Este middleware nos permite añadir alguna información al contexto de cada petición,
@@ -35,11 +42,7 @@ morganBody(app);
 app.use((req, res, next) => {
   // Para cualquier petición, añadimos en su contexto
   req.context = {
-    // Todos los modelos
-    models,
-    // El "usuario actual". Ahora mismo simula que hayamos hecho un login
-    // Más adelante, lo podremos conseguir de otra forma.
-    me: models.users.userRepository.findById(1)
+    models
   };
   next();
 });
@@ -47,6 +50,10 @@ app.use((req, res, next) => {
 
 // Configuración de las rutas.
 app.use('/users', routes.user);
+//app.use('/post', routes.post);
+app.use('/auth', routes.auth)
+
+
 
 
 // Inicialización del servidor
