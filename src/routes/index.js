@@ -1,8 +1,8 @@
 import user from './user';
-import cancion from './cancion';
-import listaReproduccion from './listaReproduccion'
+import song from './song';
+import list from './list'
 
 
 export default {
-    user, cancion, listaReproduccion
+    user, song, list
 }

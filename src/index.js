@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 
 // Configuración de las rutas.
 app.use('/users', routes.user);
-app.use('/post', routes.post);
+
 
 // Inicialización del servidor
 app.listen(process.env.PORT, () =>

@@ -1,13 +1,15 @@
-import { User, userRepository } from '../models/users';
+import { users } from '../models/';
+import { User } from '../models/users';
+
 
 const UserController = {
 
     todosLosUsuarios : (req, res) => {
-        res.json(userRepository.findAll());
+        res.json(req.context.models.users.userRepository.findAll());
     },
 
     usuarioPorId : (req, res) => {
-        let user = userRepository.findById(req.params.id);
+        let user = req.context.models.users.userRepository.findById(req.params.id);
         if (user != undefined) {
             res.json(user);
         } else {
@@ -18,24 +20,6 @@ const UserController = {
 
     me : (req, res) => {
         res.json(req.context.me);
-    },
-
-    nuevoUsuario : (req, res) => {
-        let usuarioCreado = userRepository.create(new User(undefined, req.body.username));
-        res.status(201).json(usuarioCreado);
-    },
-
-    editarUsuario: (req, res) => {
-        let usuarioModificado = userRepository.updateById(req.params.id, new User(undefined, req.body.username));
-        if (usuarioModificado == undefined)
-            res.sendStatus(404);
-        else   
-            res.status(200).json(usuarioModificado);
-    },
-
-    eliminarUsuario: (req, res) => {
-        userRepository.delete(req.params.id);
-        res.sendStatus(204);
     }
 
 
