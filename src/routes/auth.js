@@ -36,7 +36,7 @@ AuthController.register);
 
 
 router.post('/login',
-    password(),
+   password(),
     AuthController.login
     );
 

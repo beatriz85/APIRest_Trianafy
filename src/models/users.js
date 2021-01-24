@@ -32,6 +32,14 @@ const userRepository = {
        const result = await User.findById(id).exec();
        return result != null ? result : undefined;
     },
+
+     // Encuentra un usuario por su username
+    async findByUsername(username) {
+        const users = await User.find({}).exec();
+        let result = users.filter(user => user.username == username);
+        return Array.isArray(result) && result.length > 0 ? result [0] : undefined;
+          
+     },
     // Inserta un nuevo usuario y devuelve el usuario insertado
     async create(newUser) {
         

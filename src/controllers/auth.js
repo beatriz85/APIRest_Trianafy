@@ -7,15 +7,7 @@ import { JwtService } from '../services/jwt';
 
 const AuthController = {
 
-    /*nuevaCancion: async (req, res) => {
-        let song = await SongRepository.create({
-            titulo: req.body.titulo,
-            artista: req.body.artista,
-            album: req.body.album,
-            year: req.body.year
-        });
-        res.status(201).json(song);
-    },*/
+    
     
     register:async (req, res, next) => {
 
@@ -34,8 +26,7 @@ const AuthController = {
             
         });
     },
-    login: async (req, res, next) => {
-        
+    login: (req, res, next) => {
         const token =  JwtService.sign(req.user);
         res.status(201).json({
             user: req.user,
