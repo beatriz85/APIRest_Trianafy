@@ -7,29 +7,36 @@ import { JwtService } from '../services/jwt';
 
 const AuthController = {
 
-    register: (req, res, next) => {
-        // ¿Realmente este método es necesario, o podríamos modificar la petición POST en /users?
-        // Mantendremos solamente esta versión, que estará más actualizada
-        
-        // La comprobación de si el username o el email ya existe la realiza la validación
-        // No es necesario hacer nada más aquí.
+    /*nuevaCancion: async (req, res) => {
+        let song = await SongRepository.create({
+            titulo: req.body.titulo,
+            artista: req.body.artista,
+            album: req.body.album,
+            year: req.body.year
+        });
+        res.status(201).json(song);
+    },*/
+    
+    register:async (req, res, next) => {
 
-
-        let usuarioCreado = userRepository.create(
-            new User(req.body.username, req.body.email, 
-                        bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS))));
+        let usuarioCreado = await userRepository.create({
+            fullname:req.body.fullname, 
+            username:req.body.username, 
+            email: req.body.email,
+            password:bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS))});
 
         // Devolvemos todos los datos del usuario menos la contraseña                
         res.status(201).json({
             id: usuarioCreado.id,
+            fullname :usuarioCreado.fullname,
             username: usuarioCreado.username,
-            email: usuarioCreado.email
+            email: usuarioCreado.email,
+            
         });
     },
-    login: (req, res, next) => {
-        // Dado que la mitad del esfuerzo lo hace la función password del servicio passport
-        // Aquí tan solo tenemos que preocuparnos de generar y devolver el token
-        const token = JwtService.sign(req.user);
+    login: async (req, res, next) => {
+        
+        const token =  JwtService.sign(req.user);
         res.status(201).json({
             user: req.user,
             token: token
