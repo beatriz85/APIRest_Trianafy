@@ -5,7 +5,7 @@ import { SongController } from '../controllers/song';
 const router = Router();
 
 
-router.get('/', SongController.todosLasCanciones);
+router.get('/', SongController.todasLasCanciones);
 
 router.get('/:id', SongController.cancionPorId);
 

@@ -1,62 +1,64 @@
-import { Song } from '../models/songs';
-import { songs } from '../models/';
+import {
+    SongRepository
+} from '../models/songs';
 
 
 const SongController = {
 
-
-    todosLasCanciones : (req, res) => {
-    
-        res.json(req.context.models.songs.songRepository.findAll());
+    todasLasCanciones: async (req, res) => {
+        const data = await SongRepository.findAll();
+        if (Array.isArray(data) && data.length > 0)
+            res.json(data);
+        else
+            res.sendStatus(404);
     },
 
+    cancionPorId: async (req, res) => {
+        let song = await SongRepository.findById(req.params.id);
+        if (song != undefined)
+            res.json(song);
+        else
+            res.sendStatus(404);
+    },
 
-    cancionPorId : (req, res) => {
-        let song = songRepository.findById(req.params.id);
+    nuevaCancion: async (req, res) => {
+        let song = await SongRepository.create({
+            titulo: req.body.titulo,
+            artista: req.body.artista,
+            album: req.body.album,
+            year: req.body.year
+        });
+        res.status(201).json(song);
+    },
+
+    editarCancion: async (req, res) => {
+        let song = await SongRepository
+            .updateById(req.params.id, {
+                titulo: req.body.title,
+                artista: req.body.artista,
+                album: req.body.album,
+                year: req.body.year
+            });
         if (song != undefined) {
             res.json(song);
         } else {
             res.sendStatus(404);
         }
-        
     },
 
-
-    editarCancion: (req, res) => {
-        let cancionModificada = cancionRepository.updateById(req.params.id, new Song(undefined, req.body.title));
-        if (cancionModificada == undefined)
-            res.sendStatus(404);
-        else   
-            res.status(200).json(cancionModificada);
-    },
-
-    nuevaCancion : (req, res) => {
-        let cancionCreada = cancioRepository.create(new Song(undefined, req.body.title));
-        res.status(201).json(cancionCreada);
-    },
-
-
-
-
-
-
-
-
-
-
-    eliminarCancion: (req, res) => {
-        cancionRepository.delete(req.params.id);
+    eliminarCancion: async (req, res) => {
+        await SongRepository.delete(req.params.id);
         res.sendStatus(204);
-    }
+    },
+
+    
+
+    
 
 
 
+}
 
-
-};
-
-
-
-export  {
+export {
     SongController
 }

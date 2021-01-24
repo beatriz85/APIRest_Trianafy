@@ -7,8 +7,8 @@ const {
 
 const songSchema = new Schema({
     id: String,
-    title: String,
-    artist: String,
+    titulo: String,
+    artista: String,
     album: String,
     year: Number,
 });
@@ -19,28 +19,32 @@ const Song = mongoose.model('Song', songSchema);
 
 const SongRepository = {
 
+    //mostrar todas las canciones
     async findAll() {
-        return await Cancion.find().exec();
+        return await Song.find().exec();
     },
 
+    //buscar canciones por id
     async findById(id) {
-        const result = await Cancionn.findById(id).exec();
+        const result = await Song.findById(id).exec();
         return result != null ? result : undefined;
     },
-    // por simplicidad, creamos una película sin actores
+    //crear canciones
     async create(nuevaCancion) {
         const song = new Song({
-            titulo: nuevaCancion.title,
-            artist: nuevaCancion.artist,
-            album: nuevaCancion.album
+            titulo: nuevaCancion.titulo,
+            artista: nuevaCancion.artista,
+            album: nuevaCancion.album,
+            year: nuevaCancion.year
         });
 
         const result = await song.save();
         return result;
     },
 
+    //actualilar cancion buscada por id
     async updateById(id, cancionModificada) {
-        const cancion = await Cancion.findById(id);
+        const cancion = await Song.findById(id);
 
         if (cancion == null) {
             return undefined;
@@ -53,8 +57,9 @@ const SongRepository = {
         return await this.updateById(cancionModificada.id, cancionModificada);
     },
 
+    //borra cancion
     async delete(id) {
-        await Cancion.findByIdAndRemove(id).exec();
+        await Song.findByIdAndRemove(id).exec();
     }
 
 

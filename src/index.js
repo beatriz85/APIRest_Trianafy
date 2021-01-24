@@ -52,6 +52,7 @@ app.use((req, res, next) => {
 
 // Configuración de las rutas.
 app.use('/users', routes.user);
+app.use('/songs', routes.song);
 
 
 
