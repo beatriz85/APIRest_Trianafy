@@ -2,7 +2,7 @@ import 'dotenv/config';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { User, userRepository } from '../../models/users';
+import { User, userRepository, toDto } from '../../models/users';
 import bcrypt from 'bcryptjs';
 
 
@@ -29,7 +29,7 @@ passport.use(new LocalStrategy({
         }
 
    }catch(err){
-    console.error("No logueado")
+    console.error(err)
    }
 
 }
@@ -69,7 +69,7 @@ export const password = () => (req, res, next) =>
 
 
         req.logIn(user, { session: false }, (err) => {
-            if (err) return res.status(401, "No autorizaciónnp").end()
+            if (err) return res.status(401).end()
             next()
         })
     })(req, res, next);
@@ -78,10 +78,10 @@ export const password = () => (req, res, next) =>
 export const token = () => (req, res, next) =>
     passport.authenticate('token', { session: false }, (err, user, info) => {
         if (err || !user) {
-            return res.status(401, "No tienes autorización").end()
+            return res.status(401).end()
         }
         req.logIn(user, { session: false }, (err) => {
-            if (err) return res.status(401, "No tienes autorización").end()
+            if (err) return res.status(401).end()
             next()
         })
     })(req, res, next);
