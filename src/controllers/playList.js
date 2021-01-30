@@ -6,7 +6,7 @@ const playlistController = {
 
     findAll: async (req,res) => {
         try{
-            const result = await playListRepository.findAll(req.user[0].id);
+            const result = await playListRepository.findAll(req.user.id);
             if(Array.isArray(result) && result.length > 0){
                 res.status(201).json(result);
             } else {
@@ -30,7 +30,7 @@ const playlistController = {
     },
     descriptionById: async (req, res) => {
         try{
-            const result = await playListRepository.descriptionById(req.params.id, req.user[0].id);
+            const result = await playListRepository.descriptionById(req.params.id, req.user.id);
             res.status(201).json({
                         description: result[0].description
                         });
@@ -43,7 +43,7 @@ const playlistController = {
             let newPlaylist = await playListRepository.updateList({
                 name: req.body.name,
                 description: req.body.description
-            }, req.params.id, req.user[0].id);
+            }, req.params.id, req.user.id);
             if(newPlaylist){
                 res.status(204).json(newPlaylist);
             } else {
@@ -55,7 +55,7 @@ const playlistController = {
     },
     deletePlaylist: async (req, res) => {
         try{
-            const result = await playListRepository.deletePlaylist(req.params.id, req.user[0].id);
+            const result = await playListRepository.deletePlaylist(req.params.id, req.user.id);
             result.deletedCount > 0 ? res.sendStatus(204) : res.status(404).send('No se ha podido encontrar ninguna Playlist con esa ID');
         }catch(error){
             res.status(502).json({Error:`Ha ocurrido un error en la petición: ${error.message}`})
@@ -66,7 +66,7 @@ const playlistController = {
             const newSong = await playListRepository.addSongToPlaylist(
                 req.params.idPlaylist,
                 req.params.idSong, 
-                req.user[0].id
+                req.user.id
             );
             if(newSong != null)
                 res.status(201).json(newSong);
@@ -81,7 +81,7 @@ const playlistController = {
         try{
             const songs = await playListRepository.getPlaylistSongs(
                 req.params.id,
-                req.user[0].id
+                req.user.id
             );
             res.status(201).json(songs);
         }catch(error){
@@ -93,7 +93,7 @@ const playlistController = {
             const result = await playListRepository.getSongFromPlaylist(
                 req.params.idPlaylist,
                 req.params.idSong,
-                req.user[0].id
+                req.user.id
             );
             res.status(201).json(result);
         }catch(error){
@@ -105,7 +105,7 @@ const playlistController = {
             const result = await playListRepository.deleteSongFromPlaylist(
                 req.params.idPlaylist,
                 req.params.idSong,
-                req.user[0].id
+                req.user.id
             );
             res.status(204).json(result);
         }catch(error){
