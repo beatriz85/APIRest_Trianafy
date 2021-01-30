@@ -1,6 +1,6 @@
 import {
     SongRepository
-} from '../models/songs';
+} from '../models/song';
 
 
 const SongController = {

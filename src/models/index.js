@@ -1,10 +1,10 @@
-import * as users from './users';
-import * as songs from './songs';
-import lists from './lists'
+import * as user from './user';
+import * as song from './song';
+import * as playList from './playList'
 
 export default {
-    users,
-    songs,
-    lists
+    user,
+    song,
+    playList
     
 }

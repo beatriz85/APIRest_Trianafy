@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user';
 import { param, body } from 'express-validator';
-//import { validar } from '../middlewares/validacion'
-import { emailExists } from '../models/users'
+import { validar } from '../middlewares/validacion'
+import { emailExists } from '../models/user'
 
 const router = Router();
 
@@ -26,7 +26,7 @@ router.post('/', [
             }),
         body('id').not().exists().withMessage('No es necesario que proporcione un ID; este se asignará automáticamente')
     ],
-    //validar, 
+    validar, 
     UserController.nuevoUsuario);
 
 router.put('/:id', UserController.editarUsuario);

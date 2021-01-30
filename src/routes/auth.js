@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { emailExists, usernameExists } from '../models/users';
+import { emailExists, usernameExists } from '../models/user';
 import { AuthController } from '../controllers/auth';
 //import { validar } from '../middlewares/validacion';
 import { password } from '../services/passport';

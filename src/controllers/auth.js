@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { User, userRepository } from '../models/users';
+import { User, userRepository } from '../models/user';
 import bcrypt from 'bcryptjs';
 import { JwtService } from '../services/jwt';
 

@@ -1,7 +1,7 @@
 import {
     User,
     userRepository
-} from '../models/users';
+} from '../models/user';
 
 import {
     body,

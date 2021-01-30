@@ -1,9 +1,9 @@
 import user from './user';
 import song from './song';
-import list from './list';
+import playlist from './playList';
 import auth from './auth';
 
 
 export default {
-    user, song, list,auth
+    user, song, playlist,auth
 }

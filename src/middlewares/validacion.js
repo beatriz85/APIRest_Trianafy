@@ -1,4 +1,4 @@
-/*import {
+import {
     validationResult
 } from 'express-validator';
 
@@ -7,7 +7,7 @@
  * con los parámetros (req.params) o con el cuerpo de una petición (req.body)
  * devolvemos un error 400 y todos los errores.
  */
-/*
+
 export const validar = (req, res, next) => {
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
@@ -16,4 +16,3 @@ export const validar = (req, res, next) => {
         next();
     }
 }
-*/
