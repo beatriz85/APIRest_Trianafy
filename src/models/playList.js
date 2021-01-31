@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { SongRepository } from './song';
 const {
     Schema
 } = mongoose;
@@ -83,7 +84,7 @@ const playListRepository = {
         const playlist = await Playlist.findOne({_id: playlistId, user_id: userId})
             .populate('songs')
             .exec();
-        const newSong = await Song.findById({_id: songId});
+        const newSong = await SongRepository.findById({_id: songId});
         if (playlist != null && newSong != 0) {
             let songNotIn = playlist.songs.filter(song => song.equals(newSong));
             if (songNotIn.length == 0) {
@@ -117,7 +118,7 @@ const playListRepository = {
     },
     async deleteSongFromPlaylist(playlistId, songId, userId) {
         const playlist = await Playlist.findOne({_id: playlistId, user_id: userId}).exec();
-        const song = await Song.findById(songId).exec();
+        const song = await SongRepository.findById(songId);
         if(playlist != null && song != 0){
             
             let idSong = 0;
