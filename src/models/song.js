@@ -19,10 +19,15 @@ const songSchema = new Schema({
 
     year: {
         type: Number,
-        required:"Debe anotar el año dónde fue publicada",
-        max:[2022,"El año debe ser inferior 2022"]
-      },
-});
+        required: "Debe anotar el año dónde fue publicada",
+        max: [2022, "El año debe ser inferior 2022"]
+    },
+
+},
+
+    {
+        versionKey: false,
+    });
 
 const Song = mongoose.model('Song', songSchema);
 
