@@ -7,10 +7,21 @@ const {
 
 const songSchema = new Schema({
     id: String,
-    titulo: String,
-    artista: String,
+    titulo: {
+        type: String,
+        required: "Es obligatorio indicar el título de la canción"
+    },
+    artista: {
+        type: String,
+        required: "Es obligatorio indicar artista de la canción"
+    },
     album: String,
-    year: Number,
+
+    year: {
+        type: Number,
+        required:"Debe anotar el año dónde fue publicada",
+        max:[2022,"El año debe ser inferior 2022"]
+      },
 });
 
 const Song = mongoose.model('Song', songSchema);
