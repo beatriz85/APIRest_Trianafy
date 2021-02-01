@@ -1,6 +1,6 @@
-/*import User from './user';
-import Song from './song';
-import PlayList from './playList';
+import { User } from './user';
+import {Song} from './song';
+import {Playlist} from './playList';
 
 
 
@@ -12,7 +12,8 @@ let usuarios = [
         password: "12345678"
 
     }),
-    new User({
+    new User
+    ({
         fullname: "Alejandra Ruiz",
         username: "alejandraruiz",
         email: "alejandra@gmail.com",
@@ -25,47 +26,46 @@ let usuarios = [
 
 
 
-
-
 let canciones = [
         new Song({
-            title: "De Mi Voz",
-            artist: "Miguel Campello",
+            titulo: "De Mi Voz",
+            artista: "Miguel Campello",
             album: "Camina",
             year: "2014"
     
         }),
         new Song({
-            title: "Aire",
-            artist: "Miguel Campello",
+            titulo: "Aire",
+            artista: "Miguel Campello",
             album: "Camina",
             year: "2014"
     
         }),
         new Song({
-            title: "Camina",
-            artist: "Miguel Campello",
+            titulo: "Camina",
+            artista: "Miguel Campello",
             album: "Camina",
             year: "2014"
     
         }),
         new Song({
-            title: "Silencio",
-            artist: "Miguel Campello",
+            titulo: "Silencio",
+            artista: "Miguel Campello",
+            album: "Entre Mil Historias",
+
+            year: "2018"
+    
+        }),
+        new Song({
+            titulo: "Tápame",
+            artista: "Miguel Campello",
             album: "Entre Mil Historias",
             year: "2018"
     
         }),
         new Song({
-            title: "Tápame",
-            artist: "Miguel Campello",
-            album: "Entre Mil Historias",
-            year: "2018"
-    
-        }),
-        new Song({
-            title: "Caballo Negro",
-            artist: "Miguel Campello",
+            titulo: "Caballo Negro",
+            artista: "Miguel Campello",
             album: "Entre Mil Historias",
             year: "2018"
     
@@ -77,14 +77,15 @@ let canciones = [
     
     
     let playlist = [
-        new PlayList ({
+        new Playlist ({
             name: "Lista Beatriz",
             description: "Miguel Campello",
             songs: [canciones[0],canciones[2],canciones[3]],
             user: usuarios[0]
     
         }),
-        new PlayList ({
+        new Playlist
+         ({
             name: "Lista Beatriz",
             description: "Miguel Campello",
             songs: [canciones[0],canciones[2],canciones[3]],
@@ -95,4 +96,4 @@ let canciones = [
 
     
 
-    export {canciones, playlist}*/
+    export {usuarios, canciones, playlist}

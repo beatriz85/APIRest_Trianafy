@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import morganBody from "morgan-body";
 import mongoose from "mongoose";
-//import {usuarios, canciones, playlist} from './models/datos'
+import {usuarios, canciones, playlist} from './models/datos'
 
 // Imports de componentes del API
 import models from './models';
@@ -70,12 +70,24 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
     console.log(`Conexión correcta a la base de datos en la URI ${process.env.DB_URI}`);
     
     //Prueba insertar datos
-    /*canciones.forEach(song => {
+    canciones.forEach(song => {
       song.save(err => {
         if (err) throw err;
         console.log("Guardado con éxito");
       })  ;
-    });*/
+    });
+    usuarios.forEach(user => {
+      user.save(err => {
+        if (err) throw err;
+        console.log("Guardado con éxito");
+      })  ;
+    });
+    playlist.forEach(playlist => {
+      playlist.save(err => {
+        if (err) throw err;
+        console.log("Guardado con éxito");
+      })  ;
+    });
     
     app.listen(process.env.PORT, () =>
       console.log(
