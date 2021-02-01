@@ -81,7 +81,7 @@ let canciones = [
             name: "Lista Beatriz",
             description: "Miguel Campello",
             songs: [canciones[0],canciones[2],canciones[3]],
-            user: usuarios[0]
+            user_id: usuarios[0]
     
         }),
         new Playlist
@@ -89,7 +89,7 @@ let canciones = [
             name: "Lista Beatriz",
             description: "Miguel Campello",
             songs: [canciones[0],canciones[2],canciones[3]],
-            user: usuarios[0]
+            user_id: usuarios[0]
     
         })
     ];
